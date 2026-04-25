@@ -136,6 +136,210 @@
   .price-label { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.1em; color: var(--text-light); text-transform: uppercase; }
   .price-value { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--lav-deep); }
   .flor-badge { width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--lav-pale),var(--lav-blush));border:1px solid var(--lav-light);display:flex;align-items:center;justify-content:center;font-size:1rem; }
+  /* ══ CARTA DEL DÍA ══ */
+  .carta-section {
+    position: relative; z-index: 1;
+    max-width: 480px; margin: 0 auto 36px;
+    padding: 0 20px;
+  }
+  .carta-title {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 0.78rem;
+    letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--text-light); margin-bottom: 16px;
+  }
+  .carta-title span { color: var(--gold); }
+  .carta-hint-top {
+    text-align: center; cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 1rem;
+    color: var(--lav-deep); margin-bottom: 14px;
+    background: linear-gradient(135deg, var(--lav-pale), #fff);
+    border: 1.5px dashed var(--lav-mid);
+    border-radius: 30px; padding: 10px 20px;
+    transition: all 0.2s;
+    animation: pulseHint 2.5s ease-in-out infinite;
+  }
+  .carta-hint-top:hover { background: var(--lav-petal); border-color: var(--lav-deep); }
+  @keyframes pulseHint {
+    0%,100% { box-shadow: 0 0 0 0 rgba(155,137,196,0); }
+    50%      { box-shadow: 0 0 0 6px rgba(155,137,196,0.2); }
+  }
+  .carta-flip-container {
+    perspective: 1000px; min-height: 320px; height: auto; cursor: pointer;
+  }
+  .carta-flip-container.flipped .carta-inner {
+    transform: rotateY(180deg);
+  }
+  .carta-inner {
+    position: relative; width: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.23,1,0.32,1);
+  }
+  .carta-front, .carta-back {
+    backface-visibility: hidden;
+    border-radius: 24px;
+    border: 1.5px solid var(--lav-light);
+    box-shadow: 0 12px 40px rgba(107,91,149,0.18);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 28px 24px;
+    text-align: center; width: 100%;
+  }
+  .carta-front {
+    background: linear-gradient(145deg, var(--lav-pale), #f8f4ff);
+  }
+  .carta-back {
+    background: linear-gradient(145deg, #fff, var(--lav-petal));
+    position: absolute; top: 0; left: 0;
+    transform: rotateY(180deg);
+    visibility: hidden;
+  }
+  .carta-flip-container.flipped .carta-front { visibility: hidden; }
+  .carta-flip-container.flipped .carta-back  { visibility: visible; position: relative; }
+  .carta-front-icon { font-size: 3.5rem; margin-bottom: 14px; animation: floatLogo 3s ease-in-out infinite; }
+  .carta-front-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; color: var(--lav-deep); margin-bottom: 6px;
+  }
+  .carta-front-hint {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 0.9rem; color: var(--text-light);
+  }
+  .carta-back-emoji { font-size: 3rem; margin-bottom: 10px; }
+  .carta-back-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem; color: var(--lav-deep); margin-bottom: 8px; font-weight: 700;
+  }
+  .carta-back-frase {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 1rem; color: var(--text-mid);
+    line-height: 1.5; margin-bottom: 14px;
+  }
+  .carta-back-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; color: var(--gold); font-weight: 600;
+    border: 1.5px solid var(--lav-light);
+    border-radius: 30px; padding: 4px 18px;
+    margin-bottom: 14px;
+  }
+  .carta-wa-btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: white; border: none; border-radius: 30px;
+    padding: 10px 22px; font-family: 'Jost', sans-serif;
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em;
+    cursor: pointer; text-decoration: none;
+    box-shadow: 0 4px 14px rgba(37,211,102,0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 10px;
+  }
+  .carta-wa-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,211,102,0.45); }
+  .carta-otra-btn {
+    display: inline-block; margin-top: 4px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 0.85rem;
+    color: var(--text-light); cursor: pointer;
+    text-decoration: underline; text-underline-offset: 3px;
+    background: none; border: none;
+  }
+  .carta-otra-btn:hover { color: var(--lav-deep); }
+
+  /* Opciones dentro de la carta */
+  .carta-opciones { width: 100%; margin-top: 10px; display: flex; flex-direction: column; gap: 8px; }
+  .carta-elige-hint {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 0.88rem;
+    color: var(--lav-mid); margin-bottom: 6px; text-align: center;
+  }
+  .carta-opt-label {
+    font-family: 'Jost', sans-serif; font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-light);
+    margin-bottom: 2px; text-align: left;
+  }
+  .carta-opt-btns { display: flex; flex-wrap: wrap; gap: 6px; }
+  .opt-btn {
+    padding: 6px 14px; border-radius: 20px; border: 1.5px solid var(--lav-light);
+    background: var(--lav-petal); color: var(--lav-deep);
+    font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 500;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .opt-btn:hover, .opt-btn.selected {
+    background: linear-gradient(135deg, var(--lav-deep), var(--lav-accent));
+    border-color: transparent; color: white;
+  }
+  .opt-btn-extra {
+    border-color: var(--gold) !important;
+    color: var(--gold) !important;
+  }
+  .opt-btn-extra.selected {
+    background: linear-gradient(135deg, #b8912a, var(--gold)) !important;
+    color: white !important;
+  }
+  .carta-pedir-btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: white; border: none; border-radius: 30px;
+    padding: 11px 24px; font-family: 'Jost', sans-serif;
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.06em;
+    cursor: pointer; text-decoration: none;
+    box-shadow: 0 4px 14px rgba(37,211,102,0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 6px; width: 100%; justify-content: center;
+  }
+  .carta-pedir-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,211,102,0.45); }
+  .carta-pedir-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+  /* Sub headers dentro de sección */
+  .sub-header {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; font-weight: 700;
+    color: var(--lav-deep); letter-spacing: 0.06em;
+    text-align: center; margin: 28px 0 14px;
+    display: flex; align-items: center; gap: 10px; justify-content: center;
+  }
+  .sub-header::before, .sub-header::after {
+    content: ''; flex: 1; max-width: 60px;
+    height: 1px; background: linear-gradient(90deg, transparent, var(--lav-light));
+  }
+  .sub-header::after { background: linear-gradient(90deg, var(--lav-light), transparent); }
+  .price-size {
+    font-family: 'Jost', sans-serif; font-size: 0.65rem;
+    color: var(--text-light); letter-spacing: 0.08em; display: block; margin-bottom: 2px;
+  }
+
+  /* Combo sugerido */
+  .combo-wrap {
+    margin-top: 14px; width: 100%;
+    background: linear-gradient(135deg, #fff8f0, #fff3fa);
+    border: 1.5px solid var(--gold); border-radius: 16px;
+    padding: 14px 16px; text-align: center;
+    animation: fadeInUp 0.5s ease both;
+  }
+  @keyframes fadeInUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+  .combo-title {
+    font-family: 'Playfair Display', serif; font-size: 0.8rem;
+    color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .combo-items { display: flex; flex-direction: column; gap: 7px; }
+  .combo-item {
+    display: flex; align-items: center; justify-content: space-between;
+    background: white; border-radius: 10px;
+    padding: 8px 12px; border: 1px solid rgba(200,169,106,0.2);
+    cursor: pointer; transition: all 0.2s;
+  }
+  .combo-item:hover { border-color: var(--gold); transform: translateX(2px); }
+  .combo-item-left { display: flex; align-items: center; gap: 8px; text-align: left; }
+  .combo-item-emoji { font-size: 1.4rem; }
+  .combo-item-name { font-family: 'Playfair Display', serif; font-size: 0.85rem; color: var(--text-dark); }
+  .combo-item-price { font-family: 'Jost', sans-serif; font-size: 0.75rem; color: var(--text-light); }
+  .combo-bar-wrap { display: flex; align-items: center; gap: 6px; }
+  .combo-bar { height: 5px; border-radius: 3px; background: linear-gradient(90deg, var(--gold), #e8c47a); min-width: 20px; }
+  .combo-pct { font-family: 'Jost', sans-serif; font-size: 0.7rem; color: var(--gold); font-weight: 600; min-width: 28px; text-align: right; }
+  .combo-hint { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.78rem; color: var(--text-light); margin-top: 8px; }
+
   /* Extras */
   .extras-block { margin-top: 36px; }
   .extras-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--lav-deep); text-align: center; margin-bottom: 16px; font-style: italic; }
@@ -219,6 +423,36 @@
   <button class="tab-btn active" onclick="showSection('calientes',this)">☕ Bebidas Calientes</button>
   <button class="tab-btn" onclick="showSection('frias',this)">🧊 Bebidas Frías</button>
   <button class="tab-btn" onclick="showSection('postres',this)">🍰 Postres</button>
+</div>
+
+<!-- ════════ CARTA DEL DÍA ════════ -->
+<div class="carta-section">
+  <p class="carta-title">❖ <span>La Carta del Día</span> ❖</p>
+  <p class="carta-hint-top" onclick="document.getElementById('cartaContainer').click()">¿No sabes qué pedir? Da clic y conoce tu bebida del día ✨</p>
+  <div class="carta-flip-container" id="cartaContainer" onclick="voltearCarta()">
+    <div class="carta-inner" id="cartaInner">
+      <div class="carta-front">
+        <div class="carta-front-icon">🃏</div>
+        <div class="carta-front-label">¿No sabes qué pedir?</div>
+        <div class="carta-front-hint">Cuéntanos cómo eres y te decimos qué pedir 😄</div>
+      </div>
+      <div class="carta-back" id="cartaBack">
+        <div class="carta-back-emoji" id="cartaEmoji">☕</div>
+        <div class="carta-back-name" id="cartaNombre">Latte</div>
+        <div class="carta-back-frase" id="cartaPerfil">Para quienes disfrutan lo sencillo</div>
+        <div class="carta-back-price" id="cartaPrecio">$55</div>
+        <div class="carta-opciones" id="cartaOpciones">
+          <p class="carta-elige-hint" id="cartaEligeHint"></p>
+        </div>
+        <div id="comboSugerido" style="display:none;width:100%;margin-bottom:8px;"></div>
+        <button class="carta-pedir-btn" id="cartaPedirBtn" disabled onclick="event.stopPropagation(); enviarPedido()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Pedir por WhatsApp
+        </button>
+        <button class="carta-otra-btn" onclick="event.stopPropagation(); nuevaCarta()">¿No te convence? Voltea otra carta 🃏</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ════════ BEBIDAS CALIENTES ════════ -->
@@ -393,27 +627,19 @@
 <!-- ════════ BEBIDAS FRÍAS ════════ -->
 <section id="frias" class="section">
   <h2 class="section-title">Bebidas Frías</h2>
+  <p class="size-note">Todos nuestros fríos son en presentación única de 16 oz</p>
+
+  <!-- SUB LATTES -->
+  <div class="sub-header">🧊 Lattes Fríos</div>
   <div class="cards-grid">
 
     <div class="card">
       <div class="card-image">🧊</div>
       <div class="card-body">
         <div class="card-name">Latte Frío</div>
-        <div class="card-ingredients">Espresso + leche fría + hielo. Refrescante y suave, ideal para el calor.</div>
+        <div class="card-ingredients">Espresso + leche fría + hielo. Suave, cremoso y muy refrescante.</div>
         <div class="card-footer">
-          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-value">$65</span></div></div></div>
-          <div class="flor-badge">❀</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-image">🫙</div>
-      <div class="card-body">
-        <div class="card-name">Americano Frío</div>
-        <div class="card-ingredients">Espresso doble + agua fría filtrada + hielo. Limpio, revitalizante y refrescante.</div>
-        <div class="card-footer">
-          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-value">$50</span></div></div></div>
+          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-size">16 oz</span><span class="price-value">$65</span></div></div></div>
           <div class="flor-badge">❀</div>
         </div>
       </div>
@@ -429,55 +655,7 @@
           <span class="flavor-tag">Vainilla</span><span class="flavor-tag">Avellana</span><span class="flavor-tag">Amaretto</span>
         </div>
         <div class="card-footer">
-          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-value">$80</span></div></div></div>
-          <div class="flor-badge">❀</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-image">🥤</div>
-      <div class="card-body">
-        <div class="card-name">Frappe</div>
-        <div class="card-ingredients">Café de Veracruz + hielo triturado + leche. Cremoso y muy refrescante.</div>
-        <div class="card-footer">
-          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-value">$70</span></div></div></div>
-          <div class="flor-badge">❀</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-image">🍃</div>
-      <div class="card-body">
-        <div class="card-name">Chai / Matcha Frappe</div>
-        <div class="card-ingredients">Chai especiado o matcha ceremonial + hielo + leche. Exótico y fresco.</div>
-        <div class="card-footer">
-          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-value">$85</span></div></div></div>
-          <div class="flor-badge">❀</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-image">🍫</div>
-      <div class="card-body">
-        <div class="card-name">Chocolate Frío</div>
-        <div class="card-ingredients">Concentrado de pulpa de cacao Oaxaqueño + leche fría + hielo. Rico y refrescante.</div>
-        <div class="card-footer">
-          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-value">$70</span></div></div></div>
-          <div class="flor-badge">❀</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-image">🧋</div>
-      <div class="card-body">
-        <div class="card-name">Chocolate Frappe</div>
-        <div class="card-ingredients">Concentrado de cacao Oaxaqueño + hielo triturado + leche. Dulce e intenso.</div>
-        <div class="card-footer">
-          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-value">$70</span></div></div></div>
+          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-size">16 oz</span><span class="price-value">$75</span></div></div></div>
           <div class="flor-badge">❀</div>
         </div>
       </div>
@@ -489,7 +667,129 @@
         <div class="card-name">Moka Frío</div>
         <div class="card-ingredients">Espresso + concentrado de cacao Oaxaqueño + leche fría + hielo. Lo mejor de dos mundos.</div>
         <div class="card-footer">
-          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-value">$75</span></div></div></div>
+          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-size">16 oz</span><span class="price-value">$75</span></div></div></div>
+          <div class="flor-badge">❀</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image">🍮</div>
+      <div class="card-body">
+        <div class="card-name">Cajeta Frío</div>
+        <div class="card-ingredients">Espresso + jarabe de cajeta + leche fría + hielo. Dulce y cremoso con sabor mexicano.</div>
+        <div class="card-footer">
+          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-size">16 oz</span><span class="price-value">$75</span></div></div></div>
+          <div class="flor-badge">❀</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image">🌶️</div>
+      <div class="card-body">
+        <div class="card-name">Chocolate Oaxaqueño Frío</div>
+        <div class="card-ingredients">Concentrado de pulpa de cacao Oaxaqueño + leche fría + hielo. Rico, auténtico y refrescante.</div>
+        <div class="card-footer">
+          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-size">16 oz</span><span class="price-value">$70</span></div></div></div>
+          <div class="flor-badge">❀</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image">🤍</div>
+      <div class="card-body">
+        <div class="card-name">Chocolate Blanco Frío</div>
+        <div class="card-ingredients">Jarabe de chocolate blanco + leche fría + hielo. Suave, dulce y diferente.</div>
+        <div class="card-footer">
+          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-size">16 oz</span><span class="price-value">$65</span></div></div></div>
+          <div class="flor-badge">❀</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image">🌿</div>
+      <div class="card-body">
+        <div class="card-name">Chai Frío</div>
+        <div class="card-ingredients">Concentrado de chai especiado + leche fría + hielo. Exótico y muy aromático.</div>
+        <div class="card-footer">
+          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-size">16 oz</span><span class="price-value">$70</span></div></div></div>
+          <div class="flor-badge">❀</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image">🍵</div>
+      <div class="card-body">
+        <div class="card-name">Matcha Frío</div>
+        <div class="card-ingredients">Matcha ceremonial + leche fría + hielo. Energizante, suave y lleno de antioxidantes.</div>
+        <div class="card-footer">
+          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-size">16 oz</span><span class="price-value">$70</span></div></div></div>
+          <div class="flor-badge">❀</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image">🌼</div>
+      <div class="card-body">
+        <div class="card-name">Tisana Fría</div>
+        <div class="card-ingredients">Infusión de hierbas servida fría con hielo, sin cafeína. Elige tu sabor:</div>
+        <div class="flavors-list">
+          <span class="flavor-tag">Ponche de Guayaba</span><span class="flavor-tag">Cereza</span>
+          <span class="flavor-tag">Moras</span><span class="flavor-tag">Manzana Arándanos</span>
+        </div>
+        <div class="card-footer">
+          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-size">16 oz</span><span class="price-value">$65</span></div></div></div>
+          <div class="flor-badge">❀</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image">🫙</div>
+      <div class="card-body">
+        <div class="card-name">Americano Frío</div>
+        <div class="card-ingredients">Espresso doble + agua fría filtrada + hielo. Limpio, directo y muy refrescante.</div>
+        <div class="card-footer">
+          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-size">16 oz</span><span class="price-value">$50</span></div></div></div>
+          <div class="flor-badge">❀</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image">🥭</div>
+      <div class="card-body">
+        <div class="card-name">Smoothie</div>
+        <div class="card-ingredients">Concentrado de pulpa de fruta natural + agua. Fresco, ligero y sin lácteos. Sabores:</div>
+        <div class="flavors-list">
+          <span class="flavor-tag">🥭 Mango</span>
+          <span class="flavor-tag">🍓 Fresa</span>
+        </div>
+        <div class="card-footer">
+          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-size">16 oz</span><span class="price-value">$65</span></div></div></div>
+          <div class="flor-badge">❀</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SUB FRAPPES -->
+  <div class="sub-header">🥤 Frappes</div>
+  <div class="cards-grid">
+
+    <div class="card">
+      <div class="card-image">🥤</div>
+      <div class="card-body">
+        <div class="card-name">Frappe de Café</div>
+        <div class="card-ingredients">Café de Veracruz + hielo triturado + leche. Cremoso, intenso y muy refrescante.</div>
+        <div class="card-footer">
+          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-size">16 oz</span><span class="price-value">$70</span></div></div></div>
           <div class="flor-badge">❀</div>
         </div>
       </div>
@@ -501,7 +801,36 @@
         <div class="card-name">Moka Frappe</div>
         <div class="card-ingredients">Espresso + concentrado de cacao Oaxaqueño + hielo triturado + leche. Intenso y helado.</div>
         <div class="card-footer">
-          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-value">$75</span></div></div></div>
+          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-size">16 oz</span><span class="price-value">$75</span></div></div></div>
+          <div class="flor-badge">❀</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image">🍫</div>
+      <div class="card-body">
+        <div class="card-name">Chocolate Frappe</div>
+        <div class="card-ingredients">Concentrado de cacao Oaxaqueño + hielo triturado + leche. Dulce, rico e intenso.</div>
+        <div class="card-footer">
+          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-size">16 oz</span><span class="price-value">$70</span></div></div></div>
+          <div class="flor-badge">❀</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image">🎨</div>
+      <div class="card-body">
+        <div class="card-name">Frappe de Jarabe</div>
+        <div class="card-ingredients">Base cremosa + hielo triturado + leche + jarabe a elegir:</div>
+        <div class="flavors-list">
+          <span class="flavor-tag">Menta</span><span class="flavor-tag">Nuez</span>
+          <span class="flavor-tag">Crema Irlandesa</span><span class="flavor-tag">Vainilla</span>
+          <span class="flavor-tag">Avellana</span><span class="flavor-tag">Amaretto</span>
+        </div>
+        <div class="card-footer">
+          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-size">16 oz</span><span class="price-value">$75</span></div></div></div>
           <div class="flor-badge">❀</div>
         </div>
       </div>
@@ -511,9 +840,33 @@
       <div class="card-image">🍮</div>
       <div class="card-body">
         <div class="card-name">Cajeta Frappe</div>
-        <div class="card-ingredients">Cajeta + hielo triturado + leche. Dulce y cremoso.</div>
+        <div class="card-ingredients">Jarabe de cajeta + hielo triturado + leche. Dulce, cremoso y con sabor mexicano.</div>
         <div class="card-footer">
-          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-value">$75</span></div></div></div>
+          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-size">16 oz</span><span class="price-value">$75</span></div></div></div>
+          <div class="flor-badge">❀</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image">🍵</div>
+      <div class="card-body">
+        <div class="card-name">Matcha Frappe</div>
+        <div class="card-ingredients">Matcha ceremonial + hielo triturado + leche. Energizante, suave y lleno de antioxidantes.</div>
+        <div class="card-footer">
+          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-size">16 oz</span><span class="price-value">$75</span></div></div></div>
+          <div class="flor-badge">❀</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image">🌿</div>
+      <div class="card-body">
+        <div class="card-name">Chai Frappe</div>
+        <div class="card-ingredients">Concentrado de chai especiado + hielo triturado + leche. Exótico, aromático y muy refrescante.</div>
+        <div class="card-footer">
+          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-size">16 oz</span><span class="price-value">$75</span></div></div></div>
           <div class="flor-badge">❀</div>
         </div>
       </div>
@@ -522,26 +875,10 @@
     <div class="card">
       <div class="card-image">🤍</div>
       <div class="card-body">
-        <div class="card-name">Chocolate Blanco Frío</div>
-        <div class="card-ingredients">Jarabe de chocolate blanco + leche fría + hielo. Suave y dulce.</div>
+        <div class="card-name">Chocolate Blanco Frappe</div>
+        <div class="card-ingredients">Jarabe de chocolate blanco + hielo triturado + leche. Suave, dulce y muy cremoso.</div>
         <div class="card-footer">
-          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-value">$65</span></div></div></div>
-          <div class="flor-badge">❀</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-image">🥭</div>
-      <div class="card-body">
-        <div class="card-name">Smoothie</div>
-        <div class="card-ingredients">Concentrado de pulpa de fruta + leche o base de agua. Natural y delicioso. Sabores:</div>
-        <div class="flavors-list">
-          <span class="flavor-tag">🥭 Mango</span>
-          <span class="flavor-tag">🍓 Fresa</span>
-        </div>
-        <div class="card-footer">
-          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-value">$65</span></div></div></div>
+          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-size">16 oz</span><span class="price-value">$75</span></div></div></div>
           <div class="flor-badge">❀</div>
         </div>
       </div>
@@ -553,23 +890,7 @@
         <div class="card-name">M&amp;Ms Frappe</div>
         <div class="card-ingredients">Jarabe de chocolate blanco + M&amp;Ms de colores + hielo + leche. Divertido y colorido.</div>
         <div class="card-footer">
-          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-value">$82</span></div></div></div>
-          <div class="flor-badge">❀</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-image">🌼</div>
-      <div class="card-body">
-        <div class="card-name">Tisana Fría</div>
-        <div class="card-ingredients">Infusión de hierbas servida fría con hielo, sin cafeína. Sabores:</div>
-        <div class="flavors-list">
-          <span class="flavor-tag">Ponche de Guayaba</span><span class="flavor-tag">Cereza</span>
-          <span class="flavor-tag">Moras</span><span class="flavor-tag">Manzana Arándanos</span>
-        </div>
-        <div class="card-footer">
-          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-value">$65</span></div></div></div>
+          <div class="price-tag"><div class="price-row"><div class="price-item"><span class="price-size">16 oz</span><span class="price-value">$82</span></div></div></div>
           <div class="flor-badge">❀</div>
         </div>
       </div>
@@ -689,9 +1010,9 @@
 
   <div class="qr-card">
     <div class="qr-title">Comparte nuestro Menú</div>
-    <div class="qr-sub">Escanea para abrir en WhatsApp</div>
+    <div class="qr-sub">Escanea para ver el menú completo</div>
     <div class="qr-frame">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=155x155&data=https://wa.me/5215530765687&bgcolor=F5F0FF&color=6B5B95&qzone=1&format=png" alt="QR WhatsApp Delirio Café"/>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=155x155&data=https://inquisitive-douhua-81d553.netlify.app&bgcolor=F5F0FF&color=6B5B95&qzone=1&format=png" alt="QR Menú Delirio Café"/>
     </div>
     <div class="qr-info">Plaza Imagen · Delirio Café · @deliriocafemx</div>
 
@@ -713,9 +1034,281 @@
 </div>
 
 <script>
+const JARABES = ['Menta','Nuez','Crema Irlandesa','Cajeta','Vainilla','Avellana','Amaretto'];
+const LECHES  = [
+  { nombre:'Entera', extra:false },
+  { nombre:'Deslactosada', extra:false },
+  { nombre:'Light', extra:false },
+  { nombre:'Deslactosada Light', extra:false },
+  { nombre:'Almendras +$15', extra:true },
+];
+const POSTRES = [
+  { emoji:'🍓', nombre:'Cheesecake Frambuesa', precio:'$65', pct:87 },
+  { emoji:'🍫', nombre:'Cheesecake Chocolate', precio:'$70', pct:79 },
+  { emoji:'🍎', nombre:'Strudel de Manzana',   precio:'$38', pct:63 },
+  { emoji:'🍪', nombre:'Galleta de Chocolate', precio:'$22', pct:55 },
+  { emoji:'🥐', nombre:'Orejas',               precio:'$32', pct:48 },
+  { emoji:'🌀', nombre:'Rol Sencillo',          precio:'$32', pct:71 },
+  { emoji:'🍥', nombre:'Rol Glaseado',          precio:'$40', pct:82 },
+  { emoji:'🍮', nombre:'Flan Napolitano',       precio:'$50', pct:68 },
+];
+
+const BEBIDAS = [
+  { emoji:"☕", nombre:"Espresso",
+    perfil:"Para quien lleva el ritmo del dia marcado hasta el ultimo minuto y no tiene tiempo que perder",
+    size:"fijo", precio:"$34", leche:false, jarabe:false },
+  { emoji:"🫖", nombre:"Americano",
+    perfil:"Para quien disfruta su momento de pausa sin afanes, con una taza que acompana sin interrumpir",
+    size:"CH_GR", pCH:"$40", pGR:"$50", leche:false, jarabe:false },
+  { emoji:"🥛", nombre:"Latte",
+    perfil:"Para quien prefiere que todo sea suave, sin complicaciones y con un toque cremoso que alegra el dia",
+    size:"CH_GR", pCH:"$55", pGR:"$62", leche:true, jarabe:false },
+  { emoji:"☁️", nombre:"Capuccino",
+    perfil:"Para quien encuentra en lo clasico la mejor opcion, siempre confiable y siempre a tiempo",
+    size:"CH_GR", pCH:"$55", pGR:"$62", leche:true, jarabe:false },
+  { emoji:"✨", nombre:"Capuccino con Sabor",
+    perfil:"Para quien le gusta darle su propio giro a las cosas sin salirse de lo que ya funciona bien",
+    size:"CH_GR", pCH:"$68", pGR:"$76", leche:true, jarabe:JARABES },
+  { emoji:"🌶️", nombre:"Chocolate Oaxaqueno",
+    perfil:"Para quien valora lo que tiene historia y caracter, lo que no sigue modas sino que las ignora con estilo",
+    size:"CH_GR", pCH:"$55", pGR:"$60", leche:true, jarabe:false },
+  { emoji:"🤍", nombre:"Chocolate Blanco",
+    perfil:"Para quien siempre encuentra la forma de sorprender con algo que nadie mas habria elegido",
+    size:"CH_GR", pCH:"$55", pGR:"$60", leche:true, jarabe:false },
+  { emoji:"🍫", nombre:"Moka",
+    perfil:"Para quien no ve por que elegir entre dos cosas buenas cuando puede tener ambas en una sola taza",
+    size:"CH_GR", pCH:"$60", pGR:"$68", leche:true, jarabe:false },
+  { emoji:"🌿", nombre:"Chai Latte",
+    perfil:"Para quien lleva el estres sin que se note, con calma y con un sabor que hace que la pausa valga doble",
+    size:"CH_GR", pCH:"$55", pGR:"$62", leche:true, jarabe:false },
+  { emoji:"🍵", nombre:"Matcha",
+    perfil:"Para quien cuida su energia con la misma atencion con que cuida sus demas decisiones del dia",
+    size:"CH_GR", pCH:"$60", pGR:"$67", leche:true, jarabe:false },
+  { emoji:"🌸", nombre:"Tisana Caliente",
+    perfil:"Para quien sabe que a veces el mejor cafe es el que no tiene cafe, y que una pausa bien elegida lo dice todo",
+    size:"fijo", precio:"$50", leche:false, jarabe:['Menta','Manzanilla','Jengibre Limon','Frutos Rojos'], jarabeLabel:"Elige tu sabor" },
+  { emoji:"🧊", nombre:"Latte Frio",
+    perfil:"Para quien no deja que el clima decida como toma su cafe, frio o caliente, siempre a su manera",
+    size:"fijo", precio:"$65", leche:true, jarabe:false },
+  { emoji:"💧", nombre:"Americano Frio",
+    perfil:"Para quien va a lo esencial sin rodeos, con hielo y sin explicaciones innecesarias",
+    size:"fijo", precio:"$50", leche:false, jarabe:false },
+  { emoji:"🍬", nombre:"Latte Frio con Sabor",
+    perfil:"Para quien le pone su sello personal a todo, hasta a la bebida que pide sin pensarlo dos veces",
+    size:"fijo", precio:"$75", leche:true, jarabe:JARABES },
+  { emoji:"🌀", nombre:"Frappe",
+    perfil:"Para quien sabe que el mejor momento del dia merece algo cremoso, frio y sin prisa para terminarlo",
+    size:"fijo", precio:"$70", leche:true, jarabe:false },
+  { emoji:"🍵", nombre:"Chai Frappe",
+    perfil:"Para quien no sigue el menu de los demas y siempre encuentra algo que lo hace sentir diferente en el buen sentido",
+    size:"fijo", precio:"$75", leche:true, jarabe:false },
+  { emoji:"🍫", nombre:"Chocolate Frio",
+    perfil:"Para quien se merece un gusto bien ganado, sin culpa y con mucho chocolate",
+    size:"fijo", precio:"$67", leche:true, jarabe:false },
+  { emoji:"🌪️", nombre:"Chocolate Frappe",
+    perfil:"Para quien despues de una manana larga busca algo que haga que la tarde empiece con mas energia",
+    size:"fijo", precio:"$70", leche:true, jarabe:false },
+  { emoji:"☕", nombre:"Moka Frio",
+    perfil:"Para quien combina café y chocolate con la misma naturalidad con que combina eficiencia y buen gusto",
+    size:"fijo", precio:"$75", leche:true, jarabe:false },
+  { emoji:"🌊", nombre:"Moka Frappe",
+    perfil:"Para quien resuelve todo con estilo y encima lo hace pedir algo que nadie mas habia pensado pedir",
+    size:"fijo", precio:"$75", leche:true, jarabe:false },
+  { emoji:"🍮", nombre:"Cajeta Frappe",
+    perfil:"Para quien no ha olvidado de donde viene y lo celebra con los sabores que siempre han estado ahi",
+    size:"fijo", precio:"$75", leche:true, jarabe:false },
+  { emoji:"🤍", nombre:"Chocolate Blanco Frio",
+    perfil:"Para quien tiene criterio propio y raramente pide lo mismo que los demas en la mesa",
+    size:"fijo", precio:"$67", leche:true, jarabe:false },
+  { emoji:"🍓", nombre:"Smoothie",
+    perfil:"Para quien quiere algo fresco y ligero que no pese en el dia pero que tampoco aburra ni un momento",
+    size:"fijo", precio:"$65", leche:false, jarabe:['Mango','Fresa'], jarabeLabel:"Elige tu sabor" },
+  { emoji:"🍬", nombre:"M&Ms Frappe",
+    perfil:"Para quien hace que hasta los dias complicados sean un poco mas divertidos con solo aparecer",
+    size:"fijo", precio:"$82", leche:true, jarabe:false },
+  { emoji:"🌼", nombre:"Tisana Fria",
+    perfil:"Para quien entiende que cuidarse tambien puede saber rico y que no siempre se necesita cafeina para rendir bien",
+    size:"fijo", precio:"$65", leche:false, jarabe:['Ponche de Guayaba','Cereza','Moras','Manzana Arandanos'], jarabeLabel:"Elige tu sabor" },
+];
+
+var cartaActual = -1;
+var yaVolteada  = false;
+var selSize     = null;
+var selLeche    = null;
+var selJarabe   = null;
+
+// Event delegation for option buttons
+document.addEventListener('click', function(e) {
+  if (e.target && e.target.classList.contains('opt-btn')) {
+    e.stopPropagation();
+    var btn = e.target;
+    var tipo  = btn.getAttribute('data-tipo');
+    var valor = btn.getAttribute('data-valor');
+    var group = btn.parentNode;
+    var all   = group.querySelectorAll('.opt-btn');
+    for (var i = 0; i < all.length; i++) { all[i].classList.remove('selected'); }
+    btn.classList.add('selected');
+    if (tipo === 'tamano') { selSize   = valor; }
+    if (tipo === 'leche')  { selLeche  = valor; }
+    if (tipo === 'jarabe') { selJarabe = valor; }
+    var b = BEBIDAS[cartaActual];
+    if (tipo === 'tamano' && b.size === 'CH_GR') {
+      document.getElementById('cartaPrecio').textContent = (valor === 'Chico') ? b.pCH : b.pGR;
+    }
+    document.getElementById('cartaPedirBtn').disabled = tieneOpciones(b);
+  }
+});
+
+function voltearCarta() {
+  if (!yaVolteada) {
+    nuevaCarta();
+    yaVolteada = true;
+  }
+}
+
+function nuevaCarta() {
+  var idx;
+  do { idx = Math.floor(Math.random() * BEBIDAS.length); } while (idx === cartaActual && BEBIDAS.length > 1);
+  cartaActual = idx;
+  selSize = null; selLeche = null; selJarabe = null;
+  var b = BEBIDAS[idx];
+
+  document.getElementById('cartaEmoji').textContent  = b.emoji;
+  document.getElementById('cartaNombre').textContent = b.nombre;
+  document.getElementById('cartaPerfil').textContent = b.perfil;
+  document.getElementById('cartaPrecio').textContent = (b.size === 'fijo') ? b.precio : ('CH ' + b.pCH + '  /  GR ' + b.pGR);
+
+  var wrap = document.getElementById('cartaOpciones');
+  wrap.innerHTML = '';
+
+  var tieneOps = (b.size === 'CH_GR') || b.leche || (b.jarabe && b.jarabe.length);
+  var hint = document.createElement('p');
+  hint.className = 'carta-elige-hint';
+  hint.textContent = tieneOps ? 'Elige tus opciones para continuar \u2193' : '\u2728 Lista para pedir';
+  wrap.appendChild(hint);
+
+  if (b.size === 'CH_GR')          { wrap.appendChild(buildOpts('tamano', 'Tamano', ['Chico','Grande'])); }
+  if (b.leche)                     { wrap.appendChild(buildOptsLeche()); }
+  if (b.jarabe && b.jarabe.length) { wrap.appendChild(buildOpts('jarabe', b.jarabeLabel || 'Jarabe', b.jarabe)); }
+
+  document.getElementById('cartaPedirBtn').disabled = tieneOpciones(b);
+  document.getElementById('cartaContainer').classList.add('flipped');
+  comboPostre = null;
+  document.getElementById('comboSugerido').style.display = 'none';
+  setTimeout(mostrarCombo, 500);
+}
+
+function buildOptsLeche() {
+  var div = document.createElement('div');
+  var lbl = document.createElement('div');
+  lbl.className = 'carta-opt-label';
+  lbl.textContent = 'Tipo de leche';
+  div.appendChild(lbl);
+  var btns = document.createElement('div');
+  btns.className = 'carta-opt-btns';
+  for (var i = 0; i < LECHES.length; i++) {
+    var l = LECHES[i];
+    var btn = document.createElement('button');
+    btn.className = 'opt-btn' + (l.extra ? ' opt-btn-extra' : '');
+    btn.setAttribute('data-tipo', 'leche');
+    btn.setAttribute('data-valor', l.nombre);
+    btn.textContent = l.extra ? l.nombre + ' ⚠️' : l.nombre;
+    if (l.extra) {
+      btn.title = 'Tiene costo adicional de $15';
+    }
+    btns.appendChild(btn);
+  }
+  div.appendChild(btns);
+  return div;
+}
+
+function buildOpts(tipo, label, opciones) {
+  var div = document.createElement('div');
+  var lbl = document.createElement('div');
+  lbl.className = 'carta-opt-label';
+  lbl.textContent = label;
+  div.appendChild(lbl);
+  var btns = document.createElement('div');
+  btns.className = 'carta-opt-btns';
+  for (var i = 0; i < opciones.length; i++) {
+    var btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.setAttribute('data-tipo', tipo);
+    btn.setAttribute('data-valor', opciones[i]);
+    btn.textContent = opciones[i];
+    btns.appendChild(btn);
+  }
+  div.appendChild(btns);
+  return div;
+}
+
+function tieneOpciones(b) {
+  if (b.size === 'CH_GR' && !selSize)  return true;
+  if (b.leche && !selLeche)            return true;
+  if (b.jarabe && b.jarabe.length && !selJarabe) return true;
+  return false;
+}
+
+function enviarPedido() {
+  var b = BEBIDAS[cartaActual];
+  var precio = (b.size === 'fijo') ? b.precio : ((selSize === 'Chico') ? b.pCH : b.pGR);
+  var lineas = [];
+  lineas.push('Hola! Quiero hacer mi pedido \uD83C\uDF38');
+  lineas.push('');
+  lineas.push('Bebida: ' + b.nombre);
+  if (selSize)   { lineas.push('Tamano: '  + selSize); }
+  if (selLeche)  { lineas.push('Leche: '   + selLeche); }
+  if (selJarabe) { lineas.push((b.jarabeLabel || 'Jarabe') + ': ' + selJarabe); }
+  lineas.push('Total: ' + precio);
+  if (comboPostre) {
+    lineas.push('Postre: ' + comboPostre.nombre + ' ' + comboPostre.precio);
+  }
+  var msg = encodeURIComponent(lineas.join('\n'));
+  window.open('https://wa.me/5215530765687?text=' + msg, '_blank');
+}
+
+function mostrarCombo() {
+  var wrap = document.getElementById('comboSugerido');
+  // Pick 3 random postres without repeating
+  var pool = POSTRES.slice();
+  var picked = [];
+  while (picked.length < 3 && pool.length > 0) {
+    var idx = Math.floor(Math.random() * pool.length);
+    picked.push(pool.splice(idx, 1)[0]);
+  }
+  // Sort by pct descending
+  picked.sort(function(a,b){ return b.pct - a.pct; });
+
+  var html = '<div class="combo-wrap"><div class="combo-title">✦ Agrégale un postre ✦</div><div class="combo-items">';
+  for (var i = 0; i < picked.length; i++) {
+    var p = picked[i];
+    var barW = Math.round(p.pct * 0.7);
+    html += '<div class="combo-item" onclick="agregarPostre(\'' + p.nombre + '\',\'' + p.precio + '\')">';
+    html += '<div class="combo-item-left"><span class="combo-item-emoji">' + p.emoji + '</span>';
+    html += '<div><div class="combo-item-name">' + p.nombre + '</div>';
+    html += '<div class="combo-item-price">' + p.precio + '</div></div></div>';
+    html += '<div class="combo-bar-wrap"><div class="combo-bar" style="width:' + barW + 'px"></div>';
+    html += '<span class="combo-pct">' + p.pct + '%</span></div></div>';
+  }
+  html += '</div><div class="combo-hint">Toca uno para agregarlo a tu pedido</div></div>';
+  wrap.innerHTML = html;
+  wrap.style.display = 'block';
+}
+
+var comboPostre = null;
+function agregarPostre(nombre, precio) {
+  comboPostre = { nombre: nombre, precio: precio };
+  // Visual feedback
+  var items = document.querySelectorAll('.combo-item');
+  for (var i = 0; i < items.length; i++) { items[i].style.opacity = '0.5'; }
+  event.currentTarget.style.opacity = '1';
+  event.currentTarget.style.borderColor = 'var(--gold)';
+  event.currentTarget.style.background = '#fffbf0';
+}
+
 function showSection(id, btn) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('visible'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
   document.getElementById(id).classList.add('visible');
   btn.classList.add('active');
 }
